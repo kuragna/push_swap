@@ -11,8 +11,10 @@
 #define STACK_B(b) print_stack(b, 'b')
 #define STACK_EMPTY 2147483648
 #define PRINT(n) printf("%d\n", n)
-#define SWAP_A(stack) swap(stack, SA)
-#define SWAP_B(stack) swap(stack, SB)
+#define SA(stack) swap(stack, SA)
+#define SB(stack) swap(stack, SB)
+#define PA(a) push(&a, pop(&stack_b), PA)
+#define PB(b) push(&b, pop(&stack_a), PB)
 
 enum e_ops
 {
@@ -34,28 +36,34 @@ typedef struct s_stack
 	struct s_stack *next;
 }	t_stack;
 
-typedef struct s_check
-{
-	int		size;
-	int		sorted;
-	char	**args;
-}	t_check;
 
-int		ft_isnumber(char *str);
+/*-------- initialize stack --------*/
 t_stack	*add_node(int value);
 void	insert(t_stack **stack, t_stack *node);
-void	check_number(char **str);
-void	check_dup(t_stack *stack, int value);
-int		issorted(t_stack *stack);
-void	add_numbers(t_stack **stack, t_check *check);
 void	stack_clear(t_stack **stack);
+int		stack_size(t_stack *stack);
+/*-------- initialize stack --------*/
+
+/*-------- errors --------*/
 void	print_err(void);
-void	print_stack(t_stack *stack, char c);
-void	small_stack(t_stack *stack);
+void	check_dup(t_stack *stack, int value);
+void	check_(char **argv);
+/*-------- errors --------*/
+
+/*-------- opertations --------*/
 void	swap(t_stack *stack, int flag);
 void	rotate(t_stack *stack, int flag);
 void	reverse_rotate(t_stack *stack, int flag);
 long	pop(t_stack **stack);
 void	push(t_stack **stack, long value, int flag);
-int		stack_size(t_stack *stack);
+/*-------- opertations --------*/
+
+
+int		issorted(t_stack *stack);
+void	add_numbers(t_stack **stack, char **argv);
+void	print_stack(t_stack *stack, char c);
+void	small_stack(t_stack *stack);
+int		find_biggest(t_stack *stack);
+int		find_smallest(t_stack *stack);
+
 #endif

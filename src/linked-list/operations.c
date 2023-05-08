@@ -14,6 +14,8 @@ void	print_op(int flag)
 		WRITE("pb\n");
 	if (flag == SA)
 		WRITE("sa\n");
+	if (flag == SB)
+		WRITE("sb\n");
 	if (flag == RA)
 		WRITE("ra\n");
 	if (flag == RRA)

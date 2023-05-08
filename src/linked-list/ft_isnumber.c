@@ -9,7 +9,7 @@ int	ft_isnumber(char *str)
 	{
 		if (str[i] == ' ' && i != 0)
 			i++;
-		if (str[i] == '+' || str[i] == '-')
+		if ((str[i] == '+' || str[i] == '-'))
 			i++;
 		if (!ft_isdigit(str[i]))
 			return (0);
