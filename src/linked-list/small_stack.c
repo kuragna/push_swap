@@ -1,21 +1,21 @@
 #include "push_swap.h"
 
-void	small_stack(t_stack *stack)
+void	small_stack(t_stack **stack)
 {
 	int	nu[3];
 
-	nu[0] = stack->value;
-	nu[1] = stack->next->value;
-	nu[2] = stack->next->next->value;
+	nu[0] = (*stack)->value;
+	nu[1] = (*stack)->next->value;
+	nu[2] = (*stack)->next->next->value;
 
-	if (issorted(stack))
+	if (issorted(*stack))
 		return ;
 	if (nu[2] > nu[0] && nu[1] < nu[2])
-		swap(stack, SA);
+		swap(*stack, SA);
 	// case 2
 	else if (nu[0] > nu[1] && nu[1] > nu[2])
 	{
-		swap(stack, SA);
+		swap(*stack, SA);
 		reverse_rotate(stack, RRA);
 	}
 	// case 3
@@ -24,7 +24,7 @@ void	small_stack(t_stack *stack)
 	// case 4
 	else if (nu[2] > nu[0] && nu[0] < nu[1])
 	{
-		swap(stack, SA);
+		swap(*stack, SA);
 		rotate(stack, RA);
 	}
 	// case 5

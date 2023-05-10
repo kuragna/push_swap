@@ -77,7 +77,6 @@ void	rotate(t_stack **stack, int flag)
 
 void	reverse_rotate(t_stack **stack, int flag)
 {
-	(void)flag;
 	t_stack	*tmp;
 	t_stack *t;
 
@@ -90,10 +89,8 @@ void	reverse_rotate(t_stack **stack, int flag)
 	t->next = NULL;
 	push(stack, tmp->value, -1);
 	free(tmp);
+	print_op(flag);
 }
-
-
-
 /**
  * Take the first element at the top of [a] and put it at the top of [b].
  * Do nothing if [a] is empty.

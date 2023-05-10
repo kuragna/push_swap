@@ -7,22 +7,22 @@ void	find_leaks()
 /* --- use PRINT for printing int --- */
 /*check for INT_MAX and INT_MIN*/
 
-void	four(t_stack *stack_a, t_stack *stack_b)
-{
-	int	b = find_biggest(stack_a);
-
-	if (stack_a->value > stack_a->next->value)
-		SA();
-	if (stack_a->value + 1 == b)
-		RA();
-	PB();
-	small_stack(stack_a);
-	PA();
-	if (stack_a->value == b)
-		RA();
-	if (stack_a->value > stack_a->next->value)
-		SA();
-}
+//void	four(t_stack *stack_a, t_stack *stack_b)
+//{
+//	int	b = find_biggest(stack_a);
+//
+//	if (stack_a->value > stack_a->next->value)
+//		SA();
+//	if (stack_a->value + 1 == b)
+//		RA();
+//	PB();
+//	small_stack(stack_a);
+//	PA();
+//	if (stack_a->value == b)
+//		RA();
+//	if (stack_a->value > stack_a->next->value)
+//		SA();
+//}
 int	find_index(t_stack *stack, int value)
 {
 	int	index;
@@ -40,14 +40,13 @@ int	find_index(t_stack *stack, int value)
 
 int main(int argc, char **argv)
 {
-//	atexit(find_leaks);
+	atexit(find_leaks);
 	(void)argc;
 	t_stack *stack_a;
 	//t_stack *stack_b = NULL;
 	add_numbers(&stack_a, argv + 1);
 	STACK_A();
-	reverse_rotate(&stack_a, RRA);
-	STACK_A();
+	//stack_clear(&stack_a);
 #if 0
 	if (check_sorted(stack_a) == 1)
 		exit(EXIT_SUCCESS);

@@ -2,24 +2,24 @@
 
 void	add_numbers(t_stack **stack, char **argv)
 {
-	int			i;
-	long	value;
-	char	**args;	
+	int	i;
+	long value;
+	char	**nums;
 
-	check_(argv);
-	while (*argv != NULL)
+	while (*argv)
 	{
 		i = -1;
-		args = ft_split(*argv, ' ');
-		while (args[++i] != NULL)
+		nums = ft_split(*argv, ' ');
+		while (nums[++i])
 		{
-			value = ft_atol(args[i]);
-			if (value > INT_MAX || value < INT_MIN)
-				print_err();
-			check_dup(*stack, value);
-			insert(stack, add_node((int)value));
+			if (check_(nums[i]) == 0)
+				print_err(stack, nums);
+			value = ft_atol(nums[i]);
+			if (check_dup(*stack, value) == 0)
+				print_err(stack, nums);
+			insert(stack, add_node(value));
 		}
-		ft_free(args);
+		ft_free(nums);
 		argv++;
 	}
 }

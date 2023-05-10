@@ -1,16 +1,14 @@
 #include "push_swap.h"
 
-void	check_dup(t_stack *head, int value)
+int	check_dup(t_stack *head, long value)
 {
-	t_stack *tmp;
-
-	tmp = head;
 	if (value > INT_MAX || value < INT_MIN)
-		print_err();
-	while (tmp != NULL)
+		return (0);
+	while (head)
 	{
-		if (tmp->value == value)
-			print_err();
-		tmp = tmp->next;
+		if (head->value == value)
+			return (0);
+		head = head->next;
 	}
+	return (1);
 }

@@ -59,9 +59,9 @@ int		stack_size(t_stack *stack);
 /*-------- initialize stack --------*/
 
 /*-------- errors --------*/
-void	print_err(void);
-void	check_dup(t_stack *stack, int value);
-void	check_(char **argv);
+void	print_err(t_stack **stack, char **ptr);
+int		check_dup(t_stack *stack, long value);
+int		check_(char *str);
 /*-------- errors --------*/
 
 /*-------- opertations --------*/
@@ -77,8 +77,12 @@ void	push(t_stack **stack, long value, int flag);
 int		issorted(t_stack *stack);
 void	add_numbers(t_stack **stack, char **argv);
 void	print_stack(t_stack *stack, char c);
-void	small_stack(t_stack *stack);
+void	small_stack(t_stack **stack);
+
+
+/*-------- find --------*/
 int		find_biggest(t_stack *stack);
 int		find_smallest(t_stack *stack);
+/*-------- find --------*/
 
 #endif
