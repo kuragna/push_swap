@@ -16,6 +16,8 @@ void	print_op(int flag)
 		WRITE("sa\n");
 	if (flag == SB)
 		WRITE("sb\n");
+	if (flag == SS)
+		WRITE("ss\n");
 	if (flag == RA)
 		WRITE("ra\n");
 	if (flag == RRA)
@@ -50,17 +52,19 @@ void	swap(t_stack *stack, int flag)
  */
 // [2][p]->[1][p]->[3][p]->null
 // [1][p]->[3][p]->[2][p]->null
-void	rotate(t_stack *stack, int flag)
+void	rotate(t_stack **stack, int flag)
 {
-	int	first;
+	t_stack *first;
+	t_stack *last;
 
-	first = stack->value;
-	while (stack->next)
-	{
-		stack->value = stack->next->value;
-		stack = stack->next;
-	}
-	stack->value = first;
+	first = *stack;
+	last = *stack;
+
+	while (last->next)
+		last = last->next;
+	*stack = first->next;
+	first->next = NULL;
+	last->next = first;
 	print_op(flag);
 }
 /**
@@ -71,25 +75,25 @@ void	rotate(t_stack *stack, int flag)
 // [2][p]->[1][p]->[3][p]->null
 // [3][p]->[2][p]->[1][p]->null
 
-void	reverse_rotate(t_stack *stack, int flag)
+void	reverse_rotate(t_stack **stack, int flag)
 {
-	int	last;
-	t_stack *tmp;
+	(void)flag;
+	t_stack	*tmp;
+	t_stack *t;
 
-	tmp = stack;
-	while (tmp->next)
-		tmp = tmp->next;
-	last = tmp->value;
-	tmp = stack;
-	while (tmp->next && tmp->next->next)
-	{
-		tmp->next->next->value = tmp->next->value;
-		tmp->next->value = tmp->value;
-		tmp = tmp->next;
-	}
-	stack->value = last;
-	print_op(flag);
+	tmp = *stack;
+	t = *stack;
+
+	while (t->next->next)
+		t = t->next;
+	tmp = t->next;
+	t->next = NULL;
+	push(stack, tmp->value, -1);
+	free(tmp);
 }
+
+
+
 /**
  * Take the first element at the top of [a] and put it at the top of [b].
  * Do nothing if [a] is empty.
@@ -131,6 +135,12 @@ long	pop(t_stack **stack)
 	return (value);
 }
 
+void	swap_both(t_stack *a, t_stack *b, int flag)
+{
+	swap(a, -1);
+	swap(b, -1);
+	print_op(flag);
+}
 
 // case1: 2 1 3 --> sa -> 1 2 3
 // case2: 3 2 1 --> sa -> 2 3 1 -> rra -> 1 2 3

@@ -7,25 +7,39 @@
 # include "../../libft/libft.h"
 
 #define WRITE(str) write(1, str, ft_strlen(str))
-#define STACK_A(a) print_stack(a, 'a')
-#define STACK_B(b) print_stack(b, 'b')
+#define STACK_A() print_stack(stack_a, 'a')
+#define STACK_B() print_stack(stack_b, 'b')
 #define STACK_EMPTY 2147483648
 #define PRINT(n) printf("%d\n", n)
-#define SA(stack) swap(stack, SA)
-#define SB(stack) swap(stack, SB)
-#define PA(a) push(&a, pop(&stack_b), PA)
-#define PB(b) push(&b, pop(&stack_a), PB)
 
+/*-------- swap --------*/
+#define SA() swap(stack_a, SA)
+#define SB() swap(stack_b, SB)
+
+/*-------- push --------*/
+#define PA() push(&stack_a, pop(&stack_b), PA)
+#define PB() push(&stack_b, pop(&stack_a), PB)
+
+/*-------- rotate --------*/
+#define RA() rotate(&stack_a, RA)
+#define RB() rotate(&stack_b, RB)
+
+/*-------- reverse rotate --------*/
+#define RRA() reverse_rotate(&stack_a, RRA)
+#define RRB() reverse_rotate(&stack_b, RRB)
 enum e_ops
 {
-	SA = 1,
+	SA,
 	SB,
+	SS,
 	PA,
 	PB,
 	RA,
 	RB,
+	RR,
 	RRA,
 	RRB,
+	RRR,
 };
 
 
@@ -33,9 +47,9 @@ typedef struct s_stack
 {
 	// position of node
 	int	value;
+	int	size;
 	struct s_stack *next;
 }	t_stack;
-
 
 /*-------- initialize stack --------*/
 t_stack	*add_node(int value);
@@ -52,8 +66,9 @@ void	check_(char **argv);
 
 /*-------- opertations --------*/
 void	swap(t_stack *stack, int flag);
-void	rotate(t_stack *stack, int flag);
-void	reverse_rotate(t_stack *stack, int flag);
+void	swap_both(t_stack *a, t_stack *b, int flag);
+void	rotate(t_stack **stack, int flag);
+void	reverse_rotate(t_stack **stack, int flag);
 long	pop(t_stack **stack);
 void	push(t_stack **stack, long value, int flag);
 /*-------- opertations --------*/
