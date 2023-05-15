@@ -4,7 +4,7 @@ void	stack_clear(t_stack **stack)
 {
 	t_stack	*tmp;
 
-	while (*stack != NULL)
+	while (*stack)
 	{
 		tmp = *stack;
 		*stack = (*stack)->next;

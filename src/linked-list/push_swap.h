@@ -27,6 +27,8 @@
 /*-------- reverse rotate --------*/
 #define RRA() reverse_rotate(&stack_a, RRA)
 #define RRB() reverse_rotate(&stack_b, RRB)
+
+
 enum e_ops
 {
 	SA,
@@ -51,6 +53,8 @@ typedef struct s_stack
 	struct s_stack *next;
 }	t_stack;
 
+typedef void (*fp)(t_stack **, int);
+
 /*-------- initialize stack --------*/
 t_stack	*add_node(int value);
 void	insert(t_stack **stack, t_stack *node);
@@ -71,16 +75,18 @@ void	rotate(t_stack **stack, int flag);
 void	reverse_rotate(t_stack **stack, int flag);
 long	pop(t_stack **stack);
 void	push(t_stack **stack, long value, int flag);
+void	rotate_by_number(fp p, t_stack **stack, int flag, int size);
 /*-------- opertations --------*/
 
 
 int		issorted(t_stack *stack);
-void	add_numbers(t_stack **stack, char **argv);
+void	add_numbers(t_stack **stack, char **argv, int *size);
 void	print_stack(t_stack *stack, char c);
 void	small_stack(t_stack **stack);
 
 
 /*-------- find --------*/
+int		get_pos(t_stack *stack, int value);
 int		find_biggest(t_stack *stack);
 int		find_smallest(t_stack *stack);
 /*-------- find --------*/

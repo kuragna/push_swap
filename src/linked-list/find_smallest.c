@@ -13,3 +13,4 @@ int	find_smallest(t_stack *stack)
 	}
 	return (first);
 }
+

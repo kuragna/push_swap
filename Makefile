@@ -5,7 +5,7 @@ RM    	=	rm -fr
 SRC   	= $(addprefix src/linked-list/, $(addsuffix .c, main  add_node insert issorted \
 		  									 check_dup add_numbers stack_clear \
 											 print_err small_stack stack_size operations \
-											 find_biggest find_smallest check))
+											 find_biggest find_smallest check get_pos))
 OBJ   	=	$(SRC:.c=.o)
 LIB   	=	-L./libft/ -lft
 

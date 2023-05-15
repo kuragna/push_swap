@@ -8,8 +8,6 @@ void	small_stack(t_stack **stack)
 	nu[1] = (*stack)->next->value;
 	nu[2] = (*stack)->next->next->value;
 
-	if (issorted(*stack))
-		return ;
 	if (nu[2] > nu[0] && nu[1] < nu[2])
 		swap(*stack, SA);
 	// case 2

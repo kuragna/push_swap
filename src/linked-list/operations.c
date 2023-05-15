@@ -1,10 +1,5 @@
 #include "push_swap.h"
 
-/**
- * Swap the first 2 elements at the top of stack.
- * Do nothing if there is only one or no elements
- * ss, sa and sb
- */
 
 void	print_op(int flag)
 {
@@ -23,6 +18,12 @@ void	print_op(int flag)
 	if (flag == RRA)
 		WRITE("rra\n");
 }
+
+/**
+ * Swap the first 2 elements at the top of stack.
+ * Do nothing if there is only one or no elements
+ * ss, sa and sb
+ */
 
 void	print_stack(t_stack *stack, char c)
 {
@@ -91,6 +92,17 @@ void	reverse_rotate(t_stack **stack, int flag)
 	free(tmp);
 	print_op(flag);
 }
+
+typedef void (*fp)(t_stack **, int);
+void	rotate_by_number(fp p, t_stack **stack, int flag, int size)
+{
+	int	i;
+
+	i = -1;
+	while (++i < size)
+		p(stack, flag);
+}
+
 /**
  * Take the first element at the top of [a] and put it at the top of [b].
  * Do nothing if [a] is empty.
@@ -131,16 +143,3 @@ long	pop(t_stack **stack)
 	free(tmp);
 	return (value);
 }
-
-void	swap_both(t_stack *a, t_stack *b, int flag)
-{
-	swap(a, -1);
-	swap(b, -1);
-	print_op(flag);
-}
-
-// case1: 2 1 3 --> sa -> 1 2 3
-// case2: 3 2 1 --> sa -> 2 3 1 -> rra -> 1 2 3
-// case3: 3 1 2 --> ra -> 1 2 3
-// case4: 1 3 2 --> sa -> 3 1 2 -> ra -> 1 2 3
-// case5: 2 3 1 --> rra -> 1 2 3
