@@ -3,20 +3,10 @@
 
 void	print_op(int flag)
 {
-	if (flag == PA)
-		WRITE("pa\n");
-	if (flag == PB)
-		WRITE("pb\n");
-	if (flag == SA)
-		WRITE("sa\n");
-	if (flag == SB)
-		WRITE("sb\n");
-	if (flag == SS)
-		WRITE("ss\n");
-	if (flag == RA)
-		WRITE("ra\n");
-	if (flag == RRA)
-		WRITE("rra\n");
+	if (flag < 0)
+		return ;
+	const char *ops[7] = {"sa\n", "sb\n", "pa\n", "pb\n", "ra\n", "rr\n", "rra\n"};
+	ft_putstr_fd((char*)ops[flag], 1);
 }
 
 /**
@@ -119,27 +109,15 @@ void	push(t_stack **stack, long value, int flag)
 	if (value == STACK_EMPTY)
 		return ;
 	if (*stack == NULL)
-		*stack = add_node(value);
+		*stack = create_node(value);
 	else
 	{
 		tmp = *stack;
-		*stack = add_node(value);
+		*stack = create_node(value);
 		(*stack)->next = tmp;
 	}
 	print_op(flag);
 }
 
 
-long	pop(t_stack **stack)
-{
-	long value;
-	t_stack *tmp;
 
-	if (*stack == NULL)
-		return (STACK_EMPTY);
-	value = (*stack)->value;
-	tmp = *stack;
-	*stack = (*stack)->next;
-	free(tmp);
-	return (value);
-}

@@ -2,23 +2,23 @@ NAME  	=	push_swap
 CC    	=	gcc
 CFLAGS	=	-Wall -Werror -Wextra -g3
 RM    	=	rm -fr
-SRC   	= $(addprefix src/linked-list/, $(addsuffix .c, main  add_node insert issorted \
-		  									 check_dup add_numbers stack_clear \
+SRC   	= $(addprefix src/linked-list/, $(addsuffix .c, main create_node insert issorted \
+		  									 check_dup parsing stack_clear \
 											 print_err small_stack stack_size operations \
-											 find_biggest find_smallest check get_pos))
+											 find_biggest find_smallest check get_pos pop))
 OBJ   	=	$(SRC:.c=.o)
-LIB   	=	-L./libft/ -lft
+LIB   	=	./libft/libft.a
 
 
-all: $(NAME) 
+all: $(LIB) $(NAME)
 
 %.o: %.c
 	$(CC) -c $(CFLAGS) $< -o $@
 
-libft:
+$(LIB):
 	make -C ./libft/
 
-$(NAME): $(OBJ) libft
+$(NAME): $(OBJ)
 	$(CC) -o $@ $(CFLAGS) $(LIB) $(OBJ)
 
 clean:
@@ -31,6 +31,6 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re libft
+.PHONY: all clean fclean re LIB
 
 

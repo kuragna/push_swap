@@ -1,27 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_biggest.c                                     :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aabourri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/19 19:41:46 by aabourri          #+#    #+#             */
-/*   Updated: 2023/05/19 19:41:54 by aabourri         ###   ########.fr       */
+/*   Created: 2023/05/19 19:39:34 by aabourri          #+#    #+#             */
+/*   Updated: 2023/05/19 20:02:56 by aabourri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	find_biggest(t_stack *stack)
+void	parsing(t_stack **stack, char **argv, int *size)
 {
-	int	first;
+	int		i;
+	long	value;
+	char	**nums;
 
-	first = stack->value;
-	while (stack)
+	while (*argv)
 	{
-		if (stack->value > first)
-			first = stack->value;
-		stack = stack->next;
+		i = -1;
+		nums = ft_split(*argv, ' ');
+		while (nums[++i])
+		{
+			if (check_(nums[i]) == 0)
+				print_err(stack, nums);
+			value = ft_atol(nums[i]);
+			if (check_dup(*stack, value) == 0)
+				print_err(stack, nums);
+			insert(stack, create_node(value));
+			*size += 1;
+		}
+		ft_free(nums);
+		argv++;
 	}
-	return (first);
 }

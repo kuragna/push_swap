@@ -33,15 +33,11 @@ enum e_ops
 {
 	SA,
 	SB,
-	SS,
 	PA,
 	PB,
 	RA,
-	RB,
 	RR,
 	RRA,
-	RRB,
-	RRR,
 };
 
 
@@ -56,7 +52,7 @@ typedef struct s_stack
 typedef void (*fp)(t_stack **, int);
 
 /*-------- initialize stack --------*/
-t_stack	*add_node(int value);
+t_stack	*create_node(int value);
 void	insert(t_stack **stack, t_stack *node);
 void	stack_clear(t_stack **stack);
 int		stack_size(t_stack *stack);
@@ -80,7 +76,7 @@ void	rotate_by_number(fp p, t_stack **stack, int flag, int size);
 
 
 int		issorted(t_stack *stack);
-void	add_numbers(t_stack **stack, char **argv, int *size);
+void	parsing(t_stack **stack, char **argv, int *size);
 void	print_stack(t_stack *stack, char c);
 void	small_stack(t_stack **stack);
 

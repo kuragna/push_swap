@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_err.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aabourri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/19 19:38:11 by aabourri          #+#    #+#             */
+/*   Updated: 2023/05/19 19:39:02 by aabourri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void    print_err(t_stack **stack, char **ptr)
+void	print_err(t_stack **stack, char **ptr)
 {
 	stack_clear(stack);
-	WRITE("Error\n");
+	write(2, "Error\n", 6);
 	ft_free(ptr);
-    exit(EXIT_FAILURE);
+	exit(EXIT_FAILURE);
 }
