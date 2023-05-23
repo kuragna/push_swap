@@ -5,8 +5,20 @@ void	print_op(int flag)
 {
 	if (flag < 0)
 		return ;
-	const char *ops[7] = {"sa\n", "sb\n", "pa\n", "pb\n", "ra\n", "rr\n", "rra\n"};
+	const char *ops[8] = {"sa\n", "sb\n", "pa\n", "pb\n", "ra\n", "rb\n", "rra\n", "rrb\n"};
 	ft_putstr_fd((char*)ops[flag], 1);
+}
+
+
+void	print_stack(t__list *list, char c)
+{
+	printf("----- stack %c -----\n", c);
+	for (; list; )
+	{
+		printf("%d\n", list->value);
+		list = list->next;
+	}
+	printf("----- stack %c -----\n", c);
 }
 
 /**
@@ -15,26 +27,20 @@ void	print_op(int flag)
  * ss, sa and sb
  */
 
-void	print_stack(t_stack *stack, char c)
-{
-	printf("----- stack %c -----\n", c);
-	for (; stack; )
-	{
-		printf("%d\n", stack->value);
-		stack = stack->next;
-	}
-	printf("----- stack %c -----\n", c);
-}
-
 void	swap(t_stack *stack, int flag)
 {
 	int	c;
+	t__list *list;
 
-	c = stack->value;
-	stack->value = stack->next->value;
-	stack->next->value = c;
+	if (stack->size < 2)
+		return ;
+	list = stack->list;
+	c = list->value;
+	list->value = list->next->value;
+	list->next->value = c;
 	print_op(flag);
 }
+
 
 /**
  * Shift up all elements of stack by 1. 
@@ -45,15 +51,16 @@ void	swap(t_stack *stack, int flag)
 // [1][p]->[3][p]->[2][p]->null
 void	rotate(t_stack **stack, int flag)
 {
-	t_stack *first;
-	t_stack *last;
+	t__list	*first;
+	t__list	*last;
 
-	first = *stack;
-	last = *stack;
-
+	if ((*stack)->size < 3)
+		return ;
+	first = (*stack)->list;
+	last = (*stack)->list;
 	while (last->next)
 		last = last->next;
-	*stack = first->next;
+	(*stack)->list = first->next;
 	first->next = NULL;
 	last->next = first;
 	print_op(flag);
@@ -68,12 +75,13 @@ void	rotate(t_stack **stack, int flag)
 
 void	reverse_rotate(t_stack **stack, int flag)
 {
-	t_stack	*tmp;
-	t_stack *t;
+	t__list	*t;
+	t__list *tmp;
 
-	tmp = *stack;
-	t = *stack;
-
+	if ((*stack)->size < 3)
+		return ;
+	t = (*stack)->list;
+	tmp = (*stack)->list;
 	while (t->next->next)
 		t = t->next;
 	tmp = t->next;
@@ -104,20 +112,20 @@ void	rotate_by_number(fp p, t_stack **stack, int flag, int size)
 
 void	push(t_stack **stack, long value, int flag)
 {
-	t_stack *tmp;
+	t__list *tmp;
 
 	if (value == STACK_EMPTY)
 		return ;
-	if (*stack == NULL)
-		*stack = create_node(value);
+	if ((*stack)->list == NULL)
+		(*stack)->list = create_node(value);
 	else
 	{
-		tmp = *stack;
-		*stack = create_node(value);
-		(*stack)->next = tmp;
+		tmp = (*stack)->list;
+		(*stack)->list = create_node(value);
+		(*stack)->list->next = tmp;
 	}
+	if (flag != -1)
+		(*stack)->size += 1;
 	print_op(flag);
 }
-
-
 

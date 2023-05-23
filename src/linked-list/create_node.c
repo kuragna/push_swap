@@ -6,15 +6,15 @@
 /*   By: aabourri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 19:43:40 by aabourri          #+#    #+#             */
-/*   Updated: 2023/05/19 19:54:48 by aabourri         ###   ########.fr       */
+/*   Updated: 2023/05/23 18:18:32 by aabourri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack	*create_node(int value)
+t__list *create_node(int value)
 {
-	t_stack	*node;
+	t__list *node;
 
 	node = malloc(sizeof(*node));
 	if (!node)

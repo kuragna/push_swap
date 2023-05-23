@@ -6,13 +6,13 @@
 /*   By: aabourri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 19:39:34 by aabourri          #+#    #+#             */
-/*   Updated: 2023/05/19 20:02:56 by aabourri         ###   ########.fr       */
+/*   Updated: 2023/05/23 18:30:22 by aabourri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	parsing(t_stack **stack, char **argv, int *size)
+void	parsing(t_stack **stack, char **argv)
 {
 	int		i;
 	long	value;
@@ -24,13 +24,12 @@ void	parsing(t_stack **stack, char **argv, int *size)
 		nums = ft_split(*argv, ' ');
 		while (nums[++i])
 		{
-			if (check_(nums[i]) == 0)
+			if (check(nums[i]) == 0)
 				print_err(stack, nums);
 			value = ft_atol(nums[i]);
-			if (check_dup(*stack, value) == 0)
+			if (check_dup((*stack)->list, value) == 0)
 				print_err(stack, nums);
 			insert(stack, create_node(value));
-			*size += 1;
 		}
 		ft_free(nums);
 		argv++;

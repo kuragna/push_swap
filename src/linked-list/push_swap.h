@@ -6,28 +6,9 @@
 # include <limits.h>
 # include "../../libft/libft.h"
 
-#define WRITE(str) write(1, str, ft_strlen(str))
-#define STACK_A() print_stack(stack_a, 'a')
-#define STACK_B() print_stack(stack_b, 'b')
+#define STACK_A() print_stack(stack_a->list, 'a')
+#define STACK_B() print_stack(stack_b->list, 'b')
 #define STACK_EMPTY 2147483648
-#define PRINT(n) printf("%d\n", n)
-
-/*-------- swap --------*/
-#define SA() swap(stack_a, SA)
-#define SB() swap(stack_b, SB)
-
-/*-------- push --------*/
-#define PA() push(&stack_a, pop(&stack_b), PA)
-#define PB() push(&stack_b, pop(&stack_a), PB)
-
-/*-------- rotate --------*/
-#define RA() rotate(&stack_a, RA)
-#define RB() rotate(&stack_b, RB)
-
-/*-------- reverse rotate --------*/
-#define RRA() reverse_rotate(&stack_a, RRA)
-#define RRB() reverse_rotate(&stack_b, RRB)
-
 
 enum e_ops
 {
@@ -36,32 +17,36 @@ enum e_ops
 	PA,
 	PB,
 	RA,
-	RR,
+	RB,
 	RRA,
+	RRB,
 };
 
+typedef struct s__list
+{
+	int	value;
+	struct s__list *next;
+} t__list;
 
 typedef struct s_stack
 {
-	// position of node
-	int	value;
+	t__list *list;
 	int	size;
-	struct s_stack *next;
-}	t_stack;
+} t_stack;
 
 typedef void (*fp)(t_stack **, int);
 
 /*-------- initialize stack --------*/
-t_stack	*create_node(int value);
-void	insert(t_stack **stack, t_stack *node);
+t__list *create_node(int value);
+void	insert(t_stack **stack, t__list *node);
 void	stack_clear(t_stack **stack);
 int		stack_size(t_stack *stack);
 /*-------- initialize stack --------*/
 
 /*-------- errors --------*/
 void	print_err(t_stack **stack, char **ptr);
-int		check_dup(t_stack *stack, long value);
-int		check_(char *str);
+int		check_dup(t__list *list, long value);
+int		check(char *str);
 /*-------- errors --------*/
 
 /*-------- opertations --------*/
@@ -75,16 +60,16 @@ void	rotate_by_number(fp p, t_stack **stack, int flag, int size);
 /*-------- opertations --------*/
 
 
-int		issorted(t_stack *stack);
-void	parsing(t_stack **stack, char **argv, int *size);
-void	print_stack(t_stack *stack, char c);
+int		issorted(t__list *list);
+void	parsing(t_stack **stack, char **argv);
+void	print_stack(t__list *list, char c);
 void	small_stack(t_stack **stack);
 
 
 /*-------- find --------*/
-int		get_pos(t_stack *stack, int value);
-int		find_biggest(t_stack *stack);
-int		find_smallest(t_stack *stack);
+int		get_pos(t__list *list, int value);
+int		find_biggest(t__list *list);
+int		find_smallest(t__list *list);
 /*-------- find --------*/
 
 #endif

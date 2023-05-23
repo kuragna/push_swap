@@ -6,23 +6,24 @@
 /*   By: aabourri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 19:40:29 by aabourri          #+#    #+#             */
-/*   Updated: 2023/05/19 19:41:12 by aabourri         ###   ########.fr       */
+/*   Updated: 2023/05/23 18:30:11 by aabourri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	insert(t_stack **stack, t_stack *node)
+void	insert(t_stack **stack, t__list *node)
 {
-	t_stack	*tmp;
+	t__list	*tmp;
 
-	if (*stack == NULL)
-		*stack = node;
+	if ((*stack)->list  == NULL)
+		(*stack)->list = node;
 	else
 	{
-		tmp = *stack;
+		tmp = (*stack)->list;
 		while (tmp->next)
 			tmp = tmp->next;
 		tmp->next = node;
 	}
+	(*stack)->size += 1;
 }

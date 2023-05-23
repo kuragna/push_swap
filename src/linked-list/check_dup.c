@@ -6,21 +6,21 @@
 /*   By: aabourri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 19:57:22 by aabourri          #+#    #+#             */
-/*   Updated: 2023/05/19 19:57:24 by aabourri         ###   ########.fr       */
+/*   Updated: 2023/05/23 18:27:32 by aabourri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	check_dup(t_stack *head, long value)
+int	check_dup(t__list *list, long value)
 {
 	if (value > INT_MAX || value < INT_MIN)
 		return (0);
-	while (head)
+	while (list)
 	{
-		if (head->value == value)
+		if (list->value == value)
 			return (0);
-		head = head->next;
+		list = list->next;
 	}
 	return (1);
 }

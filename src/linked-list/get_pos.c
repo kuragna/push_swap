@@ -6,7 +6,7 @@
 /*   By: aabourri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 19:37:38 by aabourri          #+#    #+#             */
-/*   Updated: 2023/05/19 19:37:41 by aabourri         ###   ########.fr       */
+/*   Updated: 2023/05/23 19:51:49 by aabourri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 // TODO: use index inside the node
 
-int	get_pos(t_stack *stack, int value)
+int	get_pos(t__list *list, int value)
 {
 	int	i;
 
 	i = 0;
-	while (stack)
+	while (list)
 	{
-		if (stack->value == value)
+		if (list->value == value)
 			return (i);
 		i++;
-		stack = stack->next;
+		list = list->next;
 	}
 	return (-1);
 }

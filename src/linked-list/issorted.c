@@ -6,7 +6,7 @@
 /*   By: aabourri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 19:35:52 by aabourri          #+#    #+#             */
-/*   Updated: 2023/05/19 19:37:01 by aabourri         ###   ########.fr       */
+/*   Updated: 2023/05/23 19:41:10 by aabourri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 // 0 means not sorted
 // 1 means sorted
-int	issorted(t_stack *stack)
+int	issorted(t__list *list)
 {
-	t_stack	*tmp;
+	t__list	*tmp;
 
-	while (stack->next)
+	while (list->next)
 	{
-		tmp = stack->next;
-		if (stack->value > tmp->value)
+		tmp = list->next;
+		if (list->value > tmp->value)
 			return (0);
-		stack = stack->next;
+		list = list->next;
 	}
 	return (1);
 }

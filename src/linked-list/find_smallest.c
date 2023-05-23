@@ -6,22 +6,22 @@
 /*   By: aabourri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 19:42:16 by aabourri          #+#    #+#             */
-/*   Updated: 2023/05/19 19:42:17 by aabourri         ###   ########.fr       */
+/*   Updated: 2023/05/23 19:53:36 by aabourri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	find_smallest(t_stack *stack)
+int	find_smallest(t__list *list)
 {
 	int	first;
 
-	first = stack->value;
-	while (stack)
+	first = list->value;
+	while (list)
 	{
-		if (stack->value < first)
-			first = stack->value;
-		stack = stack->next;
+		if (list->value < first)
+			first = list->value;
+		list = list->next;
 	}
 	return (first);
 }

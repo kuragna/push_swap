@@ -6,7 +6,7 @@
 /*   By: aabourri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 19:34:13 by aabourri          #+#    #+#             */
-/*   Updated: 2023/05/19 19:34:33 by aabourri         ###   ########.fr       */
+/*   Updated: 2023/05/23 19:48:13 by aabourri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void	small_stack(t_stack **stack)
 {
 	int	nu[3];
 
-	nu[0] = (*stack)->value;
-	nu[1] = (*stack)->next->value;
-	nu[2] = (*stack)->next->next->value;
-	if (issorted(*stack))
+	nu[0] = (*stack)->list->value;
+	nu[1] = (*stack)->list->next->value;
+	nu[2] = (*stack)->list->next->next->value;
+	if (issorted((*stack)->list))
 		return ;
 	else if (nu[2] > nu[0] && nu[1] < nu[2])
 		swap(*stack, SA);
