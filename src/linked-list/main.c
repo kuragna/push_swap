@@ -40,52 +40,6 @@ void	test(t_stack **stack_a, t_stack **stack_b)
 		push(stack_a, value, PA);
 	}
 }
-#if 0
-
-void	move(t_stack **stack_a, t_stack **stack_b, int size, int key)
-{
-	while (size)
-	{
-		if ((*stack_a)->value <= key)
-			push(stack_b, pop(stack_a), PB);
-		else
-			rotate(stack_a, RA);
-		size--;
-	}
-}
-
-void	steps(t_stack **stack_a, t_stack **stack_b, int size)
-{
-	while (size)
-	{
-		int	mid = size / 2;
-		int	idx = get_pos(*stack_b, find_biggest(*stack_b));
-		if (idx <= mid)
-			rotate_by_number(rotate, stack_b, RB, idx);
-		else
-			rotate_by_number(reverse_rotate, stack_b, RRB, size - idx);
-		push(stack_a, pop(stack_b), PA);
-		size--;
-	}
-}
-
-
-void	same(t_stack **stack_a, t_stack **stack_b, int size)
-{
-
-	while (size)
-	{
-		int	mid = size / 2;
-		int	idx = get_pos(*stack_a, find_biggest(*stack_a));
-		if (idx <= mid)
-			rotate_by_number(rotate, stack_a, RA, idx);
-		else
-			rotate_by_number(reverse_rotate, stack_a, RRA, size - idx);
-		push(stack_b, pop(stack_a), PB);
-		size--;
-	}
-}
-#endif
 
 // first: 100 moves
 // second: 75 moves
@@ -104,6 +58,102 @@ t_stack *create_stack()
 	return (stack);
 }
 
+void	move(t_stack **stack_a, t_stack **stack_b, int key)
+{
+	int	size = (*stack_a)->size;
+
+	while (size)
+	{
+		if ((*stack_a)->list->value <= key)
+		{
+			push(stack_b, pop(stack_a), PB);
+			if ((*stack_b)->list->value < key)
+				rotate(stack_b, RB);
+		}
+		else
+			rotate(stack_a, RA);
+		size--;
+	}
+}
+
+void	to_a(t_stack **stack_a, t_stack **stack_b)
+{
+	int	size = (*stack_b)->size;
+
+	while (size)
+	{
+		int	mid = size / 2;
+		int	idx = get_pos((*stack_b)->list, find_biggest((*stack_b)->list));
+
+		if (idx <= mid)
+			rotate_by_number(rotate, stack_b, RB, idx);
+		else
+			rotate_by_number(reverse_rotate, stack_b, RRB, size - idx);
+		push(stack_a, pop(stack_b), PA);
+		size--;
+	}
+
+}
+
+void	to_b(t_stack **stack_a, t_stack **stack_b)
+{
+	int	size = (*stack_a)->size;
+
+	while (size)
+	{
+		int	mid = size / 2;
+		int	idx = get_pos((*stack_a)->list, find_smallest((*stack_a)->list));
+
+		if (idx <= mid)
+			rotate_by_number(rotate, stack_a, RA, idx);
+		else
+			rotate_by_number(reverse_rotate, stack_a, RRA, size - idx);
+		push(stack_b, pop(stack_a), PB);
+		size--;
+	}
+
+}
+
+void	move2(t_stack **stack_a, t_stack **stack_b, int key)
+{	
+	int	size = (*stack_a)->size;
+
+	while (size)
+	{
+		if ((*stack_a)->list->value <= key)
+			push(stack_b, pop(stack_a), PB);
+		else
+			rotate(stack_a, RA);
+		size--;
+	}
+}
+
+/*
+ * 25: 100 moves
+ * 50: 75 moves
+ * 75: 50 moves
+ * total: 225 moves
+*/
+
+/* 50: 122 - 124 moves
+ * 75: 147 - 149 moves
+*/
+void	st(t_stack **stack_a, t_stack **stack_b, int key)
+{
+	int	size = (*stack_a)->size;
+	while (size)
+	{
+		if ((*stack_a)->list->value < key)
+		{
+			push(stack_b, pop(stack_a), PB);
+			if ((*stack_b)->size > 2 && (*stack_b)->list->value <= key - 12)
+				rotate(stack_b, RB);
+		}
+		else
+			rotate(stack_a, RA);
+		size--;
+	}
+}
 int main(int argc, char **argv)
 {
 	(void)argc;
@@ -111,6 +161,19 @@ int main(int argc, char **argv)
 	t_stack *stack_b = create_stack();
 
 	parsing(&stack_a, argv + 1);
-	test(&stack_a, &stack_b);
+
+	int	sz = 24;
+	st(&stack_a, &stack_b, sz);
+	st(&stack_a, &stack_b, sz * 2);
+	st(&stack_a, &stack_b, sz * 3);
+	to_b(&stack_a, &stack_b);
+	to_a(&stack_a, &stack_b);
+
 	return 0;
 }
+
+/*
+ * sort 25 numbers:
+ * by using one chunk: 161
+ * by using two chunk: 118
+ */
