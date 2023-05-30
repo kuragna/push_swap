@@ -116,7 +116,7 @@ void	push(t_stack **stack, long value, int flag)
 
 	if (value == STACK_EMPTY)
 		return ;
-	if ((*stack)->list == NULL)
+	else if ((*stack)->list == NULL)
 		(*stack)->list = create_node(value);
 	else
 	{

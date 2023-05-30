@@ -1,80 +1,35 @@
 #include "push_swap.h"
+#include <math.h>
 
 void	print_op(int flag);
-
-
 
 void	find_leaks()
 {
 	system("leaks -q push_swap");
 }
 
-
-void	test(t_stack **stack_a, t_stack **stack_b)
+int	ft_abs(int n)
 {
-	int	size;
-	int	idx;
-	int	mid;
-
-	size = (*stack_a)->size;
-	while (size > 3)
-	{
-		mid = size / 2;
-		idx = get_pos((*stack_a)->list, find_smallest((*stack_a)->list));
-		if (idx == 1)
-			swap(*stack_a, SA);
-		else if (idx <= mid)
-			rotate_by_number(rotate, stack_a, RA, idx);
-		else
-			rotate_by_number(reverse_rotate, stack_a, RRA, size - idx);
-		push(stack_b, pop(stack_a), PB);
-		size--;
-	}
-
-	small_stack(stack_a);
-
-	long value = 1;
-	while (value != STACK_EMPTY)
-	{
-		value = pop(stack_b);
-		push(stack_a, value, PA);
-	}
+	if (n < 0)
+		n *= -1;
+	return n;
 }
 
-// first: 100 moves
-// second: 75 moves
-// third: 50 moves
-// last: 25 move
-
-
-t_stack *create_stack()
+int	get_mid(t__list *list, int min, int max)
 {
-	t_stack *stack;
+	int	value;
 
-	stack = malloc(sizeof(*stack));
-	if (!stack)
-		return (NULL);
-	ft_memset(stack, 0, sizeof(*stack));
-	return (stack);
-}
-
-void	move(t_stack **stack_a, t_stack **stack_b, int key)
-{
-	int	size = (*stack_a)->size;
-
-	while (size)
+	while (list)
 	{
-		if ((*stack_a)->list->value <= key)
-		{
-			push(stack_b, pop(stack_a), PB);
-			if ((*stack_b)->list->value < key)
-				rotate(stack_b, RB);
-		}
-		else
-			rotate(stack_a, RA);
-		size--;
+		value = list->value;
+		if (ft_abs(min - value) == ft_abs(max - value))
+			return (value);
+		list = list->next;
 	}
+	return (-1);
 }
+
+
 
 void	to_a(t_stack **stack_a, t_stack **stack_b)
 {
@@ -83,9 +38,11 @@ void	to_a(t_stack **stack_a, t_stack **stack_b)
 	while (size)
 	{
 		int	mid = size / 2;
-		int	idx = get_pos((*stack_b)->list, find_biggest((*stack_b)->list));
+		int	idx = get_pos((*stack_b)->list, get_max((*stack_b)->list));
 
-		if (idx <= mid)
+		if (idx == 1)
+			swap(*stack_b, SB);
+		else if (idx <= mid)
 			rotate_by_number(rotate, stack_b, RB, idx);
 		else
 			rotate_by_number(reverse_rotate, stack_b, RRB, size - idx);
@@ -102,51 +59,44 @@ void	to_b(t_stack **stack_a, t_stack **stack_b)
 	while (size)
 	{
 		int	mid = size / 2;
-		int	idx = get_pos((*stack_a)->list, find_smallest((*stack_a)->list));
-
-		if (idx <= mid)
+		int	idx = get_pos((*stack_a)->list, get_min((*stack_a)->list));
+		if (idx == 1)
+			swap(*stack_a, SA);
+		else if (idx < mid)
 			rotate_by_number(rotate, stack_a, RA, idx);
 		else
 			rotate_by_number(reverse_rotate, stack_a, RRA, size - idx);
 		push(stack_b, pop(stack_a), PB);
 		size--;
 	}
-
 }
 
-void	move2(t_stack **stack_a, t_stack **stack_b, int key)
-{	
+
+int	find_by_index(t__list *list, int idx)
+{
+	int	i = -1;
+	while (++i < idx)
+		list = list->next;
+	return (list->value);
+}
+
+int	get_last(t__list *list)
+{
+	while (list->next)
+		list = list->next;
+	return (list->value);
+}
+
+void	st(t_stack **stack_a, t_stack **stack_b, int key)
+{
 	int	size = (*stack_a)->size;
 
 	while (size)
 	{
 		if ((*stack_a)->list->value <= key)
-			push(stack_b, pop(stack_a), PB);
-		else
-			rotate(stack_a, RA);
-		size--;
-	}
-}
-
-/*
- * 25: 100 moves
- * 50: 75 moves
- * 75: 50 moves
- * total: 225 moves
-*/
-
-/* 50: 122 - 124 moves
- * 75: 147 - 149 moves
-*/
-void	st(t_stack **stack_a, t_stack **stack_b, int key)
-{
-	int	size = (*stack_a)->size;
-	while (size)
-	{
-		if ((*stack_a)->list->value < key)
 		{
 			push(stack_b, pop(stack_a), PB);
-			if ((*stack_b)->size > 2 && (*stack_b)->list->value <= key - 12)
+			if ((*stack_b)->size >= 2 && (*stack_b)->list->value < key - 13)
 				rotate(stack_b, RB);
 		}
 		else
@@ -154,26 +104,15 @@ void	st(t_stack **stack_a, t_stack **stack_b, int key)
 		size--;
 	}
 }
-int main(int argc, char **argv)
+
+
+int	main(int argc, char **argv)
 {
 	(void)argc;
 	t_stack *stack_a = create_stack();
-	t_stack *stack_b = create_stack();
 
 	parsing(&stack_a, argv + 1);
-
-	int	sz = 24;
-	st(&stack_a, &stack_b, sz);
-	st(&stack_a, &stack_b, sz * 2);
-	st(&stack_a, &stack_b, sz * 3);
-	to_b(&stack_a, &stack_b);
-	to_a(&stack_a, &stack_b);
-
+// 	set_index(&stack_a->list, 1);
 	return 0;
 }
 
-/*
- * sort 25 numbers:
- * by using one chunk: 161
- * by using two chunk: 118
- */

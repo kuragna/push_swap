@@ -6,7 +6,7 @@
 /*   By: aabourri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 19:39:34 by aabourri          #+#    #+#             */
-/*   Updated: 2023/05/23 18:30:22 by aabourri         ###   ########.fr       */
+/*   Updated: 2023/05/30 18:51:07 by aabourri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	parsing(t_stack **stack, char **argv)
 				print_err(stack, nums);
 			insert(stack, create_node(value));
 		}
-		ft_free(nums);
 		argv++;
 	}
 }

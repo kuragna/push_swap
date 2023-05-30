@@ -6,7 +6,7 @@
 /*   By: aabourri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 19:25:04 by aabourri          #+#    #+#             */
-/*   Updated: 2023/05/19 19:25:24 by aabourri         ###   ########.fr       */
+/*   Updated: 2023/05/25 15:10:57 by aabourri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 
 void	stack_clear(t_stack **stack)
 {
-	t_stack	*tmp;
+	t__list *tmp;
 
-	while (*stack)
+	while ((*stack)->list)
 	{
-		tmp = *stack;
-		*stack = (*stack)->next;
+		tmp = (*stack)->list;
+		(*stack)->list = (*stack)->list->next;
 		free(tmp);
 	}
+	free(*stack);
 }

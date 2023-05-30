@@ -2,10 +2,14 @@ NAME  	=	push_swap
 CC    	=	gcc
 CFLAGS	=	-Wall -Werror -Wextra -g3
 RM    	=	rm -fr
-SRC   	= $(addprefix src/linked-list/, $(addsuffix .c, main create_node insert issorted \
-		  									 check_dup parsing stack_clear \
-											 print_err small_stack stack_size operations \
-											 find_biggest find_smallest check get_pos pop))
+
+
+
+
+SRC		= $(addsuffix .c, main create_node create_stack insert issorted check_dup parsing stack_clear \
+		  				  print_err small_stack operations check get_pos pop get_min get_max)
+SRC		:= $(addprefix src/linked-list/, $(SRC))
+
 OBJ   	=	$(SRC:.c=.o)
 LIB   	=	./libft/libft.a
 

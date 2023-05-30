@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_biggest.c                                     :+:      :+:    :+:   */
+/*   create_stack.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aabourri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/19 19:41:46 by aabourri          #+#    #+#             */
-/*   Updated: 2023/05/23 19:52:48 by aabourri         ###   ########.fr       */
+/*   Created: 2023/05/30 13:28:16 by aabourri          #+#    #+#             */
+/*   Updated: 2023/05/30 19:27:45 by aabourri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	find_biggest(t__list *list)
+t_stack *create_stack()
 {
-	int	first;
+	t_stack *stack;
 
-	first = list->value;
-	while (list)
-	{
-		if (list->value > first)
-			first = list->value;
-		list = list->next;
-	}
-	return (first);
+	stack = malloc(sizeof(*stack));
+	if (!stack)
+		return (NULL);
+	ft_memset(stack, 0, sizeof(*stack));
+	return (stack);
 }
