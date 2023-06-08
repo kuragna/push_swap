@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_pos.c                                          :+:      :+:    :+:   */
+/*   issorted.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aabourri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/19 19:37:38 by aabourri          #+#    #+#             */
-/*   Updated: 2023/05/23 19:51:49 by aabourri         ###   ########.fr       */
+/*   Created: 2023/05/19 19:35:52 by aabourri          #+#    #+#             */
+/*   Updated: 2023/06/08 16:07:08 by aabourri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// TODO: use index inside the node
-
-int	get_pos(t__list *list, int value)
+// 0 means not sorted
+// 1 means sorted
+int	issorted(t_node *head)
 {
-	int	i;
+	t_node	*tmp;
+	t_node	*tmp2;
 
-	i = 0;
-	while (list)
+	tmp2 = head;
+	while (tmp2->next)
 	{
-		if (list->value == value)
-			return (i);
-		i++;
-		list = list->next;
+		tmp = tmp2->next;
+		if (tmp2->value > tmp->value)
+			return (0);
+		tmp2 = tmp2->next;
 	}
-	return (-1);
+	return (1);
 }

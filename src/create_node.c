@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   issorted.c                                         :+:      :+:    :+:   */
+/*   create_node.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aabourri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/19 19:35:52 by aabourri          #+#    #+#             */
-/*   Updated: 2023/05/23 19:41:10 by aabourri         ###   ########.fr       */
+/*   Created: 2023/05/19 19:43:40 by aabourri          #+#    #+#             */
+/*   Updated: 2023/06/08 19:03:49 by aabourri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// 0 means not sorted
-// 1 means sorted
-int	issorted(t__list *list)
+t_node	*create_node(int value)
 {
-	t__list	*tmp;
+	t_node	*node;
+	size_t	size;
 
-	while (list->next)
-	{
-		tmp = list->next;
-		if (list->value > tmp->value)
-			return (0);
-		list = list->next;
-	}
-	return (1);
+	size = sizeof(*node);
+	node = malloc(size);
+	if (!node)
+		return (NULL);
+	node->value = value;
+	node->index = 0;
+	node->prev = NULL;
+	node->next = NULL;
+	return (node);
 }

@@ -1,26 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_clear.c                                      :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aabourri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/19 19:25:04 by aabourri          #+#    #+#             */
-/*   Updated: 2023/05/25 15:10:57 by aabourri         ###   ########.fr       */
+/*   Created: 2023/05/19 19:39:34 by aabourri          #+#    #+#             */
+/*   Updated: 2023/06/08 19:00:52 by aabourri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	stack_clear(t_stack **stack)
+void	parsing(t_stack **stack, char **argv)
 {
-	t__list *tmp;
+	int		i;
+	long	value;
+	char	**nums;
 
-	while ((*stack)->list)
+	while (*argv)
 	{
-		tmp = (*stack)->list;
-		(*stack)->list = (*stack)->list->next;
-		free(tmp);
+		i = -1;
+		nums = ft_split(*argv, ' ');
+		if (!nums)
+			return ;
+		while (nums && nums[++i])
+		{
+			if (check_number(nums[i]))
+				print_err(stack, nums);
+			value = ft_atol(nums[i]);
+			if (check_dup((*stack)->head, value))
+				print_err(stack, nums);
+			push_back(stack, value);
+		}
+		ft_free(nums);
+		argv++;
 	}
-	free(*stack);
 }

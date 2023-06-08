@@ -6,9 +6,12 @@ RM    	=	rm -fr
 
 
 
-SRC		= $(addsuffix .c, main create_node create_stack insert issorted check_dup parsing stack_clear \
-		  				  print_err small_stack operations check get_pos pop get_min get_max)
-SRC		:= $(addprefix src/linked-list/, $(SRC))
+SRC		= $(addsuffix .c, main create_node create_stack push rotate issorted check_dup parsing stack_clear \
+		  				  print_err small_stack operations check_number get)
+SRC		:= $(addprefix src/, $(SRC))
+
+
+
 
 OBJ   	=	$(SRC:.c=.o)
 LIB   	=	./libft/libft.a

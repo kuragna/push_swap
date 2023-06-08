@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_node.c                                      :+:      :+:    :+:   */
+/*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aabourri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/19 19:43:40 by aabourri          #+#    #+#             */
-/*   Updated: 2023/05/30 19:32:44 by aabourri         ###   ########.fr       */
+/*   Created: 2023/05/19 19:55:14 by aabourri          #+#    #+#             */
+/*   Updated: 2023/06/08 16:51:48 by aabourri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t__list *create_node(int value)
+/**
+ * 0 means found non-integer
+ * 1 means argmunet clean
+ */
+int	check_number(char *str)
 {
-	t__list *node;
-
-	node = malloc(sizeof(*node));
-	if (!node)
-		return (NULL);
-	node->index = 0;
-	node->value = value;
-	node->next = NULL;
-	return (node);
+	while (*str)
+	{
+		if (*str == '+' || *str == '-')
+		{
+			if (ft_isdigit(*(str - 1)) && ft_isdigit(*(str + 1)))
+				return (1);
+			str++;
+		}
+		if (!ft_isdigit(*str))
+			return (1);
+		str++;
+	}
+	return (0);
 }

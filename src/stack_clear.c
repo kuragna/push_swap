@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_max.c                                          :+:      :+:    :+:   */
+/*   stack_clear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aabourri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/26 15:25:48 by aabourri          #+#    #+#             */
-/*   Updated: 2023/05/26 18:10:45 by aabourri         ###   ########.fr       */
+/*   Created: 2023/05/19 19:25:04 by aabourri          #+#    #+#             */
+/*   Updated: 2023/06/08 17:31:57 by aabourri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "push_swap.h"
 
-int	get_max(t__list *list)
+void	stack_clear(t_stack **stack_a)
 {
-	int	max;
+	t_node	*tmp;
 
-	max = list->value;
-	while (list)
+	while ((*stack_a)->head)
 	{
-		if (list->value > max)
-			max = list->value;
-		list = list->next;
+		tmp = (*stack_a)->head;
+		(*stack_a)->head = (*stack_a)->head->next;
+		free(tmp);
+		tmp = NULL;
 	}
-	return (max);
+	free(*stack_a);
+	(*stack_a)->head = NULL;
+	(*stack_a)->tail = NULL;
 }
