@@ -6,7 +6,7 @@
 /*   By: aabourri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 15:20:29 by aabourri          #+#    #+#             */
-/*   Updated: 2023/06/08 19:10:17 by aabourri         ###   ########.fr       */
+/*   Updated: 2023/06/08 20:02:39 by aabourri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int	get_pos(t_stack *stack, int target)
 int	get_max(t_stack *stack)
 {
 	t_node	*tmp[2];
-	int	mid;
-	int	max[2];
+	int		mid;
+	int		max[2];
 
 	mid = stack->size / 2;
 	tmp[0] = stack->head;
@@ -64,8 +64,8 @@ int	get_max(t_stack *stack)
 int	get_min(t_stack *stack)
 {
 	t_node	*tmp[2];	
-	int	mid;
-	int	min[2];
+	int		mid;
+	int		min[2];
 
 	mid = stack->size / 2;
 	tmp[0] = stack->head;

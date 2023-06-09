@@ -1,19 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   operations.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aabourri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/08 20:02:55 by aabourri          #+#    #+#             */
+/*   Updated: 2023/06/09 18:36:44 by aabourri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
-
-
-void	print_op(int flag)
-{
-	if (flag < 0)
-		return ;
-	const char *ops[8] = {"sa\n", "sb\n", "pa\n", "pb\n", "ra\n", "rb\n", "rra\n", "rrb\n"};
-	ft_putstr_fd((char*)ops[flag], 1);
-}
 
 
 void	stack_tail(t_node *tail, char c)
 {
 	printf("----- stack %c [tail] -----\n", c);
-	for (; tail; )
+	while (tail)
 	{
 		printf("%d\n", tail->value);
 		tail = tail->prev;
@@ -24,11 +27,10 @@ void	stack_tail(t_node *tail, char c)
 void	stack_head(t_node *head, char c)
 {
 	printf("----- stack %c [head] -----\n", c);
-	for (; head; )
+	while (head)
 	{
 		printf("%d\n", head->value);
 		head = head->next;
 	}
 	printf("----- stack %c [head] -----\n", c);
 }
-

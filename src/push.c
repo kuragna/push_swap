@@ -6,7 +6,7 @@
 /*   By: aabourri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 15:08:46 by aabourri          #+#    #+#             */
-/*   Updated: 2023/06/08 19:11:19 by aabourri         ###   ########.fr       */
+/*   Updated: 2023/06/09 18:52:12 by aabourri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	push_front(t_stack **stack, long value, int flag)
 		(*stack)->head = node;
 	}
 	(*stack)->size += 1;
-	print_op(flag);
+	print_move(flag);
 }
 
 long	pop(t_stack **stack)
@@ -58,7 +58,7 @@ long	pop(t_stack **stack)
 	t_node	*tmp;
 	long	value;
 
-	if ((*stack)->size == 0)
+	if ((*stack)->size == 0 || (*stack)->head == NULL)
 		return (STACK_EMPTY);
 	value = (*stack)->head->value;
 	tmp = (*stack)->head;

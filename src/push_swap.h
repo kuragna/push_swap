@@ -6,7 +6,7 @@
 /*   By: aabourri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 14:49:03 by aabourri          #+#    #+#             */
-/*   Updated: 2023/06/08 19:03:29 by aabourri         ###   ########.fr       */
+/*   Updated: 2023/06/09 19:46:49 by aabourri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,9 @@
 # include <limits.h>
 # include "../libft/libft.h"
 
-// #define STACK_A() stack_head(stack_a->head, 'a'); \
-// 	stack_tail(stack_a->tail, 'a');
-// #define STACK_B() stack_head(stack_b->head, 'b'); \
-// 	stack_tail(stack_b->tail, 'b')
-
-#define STACK_EMPTY 2147483648
+# ifndef STACK_EMPTY
+#  define STACK_EMPTY 2147483648
+# endif
 
 enum e_flags
 {
@@ -36,7 +33,8 @@ enum e_flags
 	RRA = 6,
 	RRB = 7,
 };
-typedef	struct s_node
+
+typedef struct s_node
 {
 	int				value;
 	int				index;
@@ -44,19 +42,16 @@ typedef	struct s_node
 	struct s_node	*prev;
 }	t_node;
 
-typedef	struct s_stack
+typedef struct s_stack
 {
 	t_node	*head;
 	t_node	*tail;
 	int		size;
 }	t_stack;
 
-
-typedef	void	(*fp)(t_stack **, int);
-t_stack *create_stack(void);
+typedef void	t_fp(t_stack **, int);
+t_stack	*create_stack(void);
 t_node	*create_node(int value);
-int		check_dup(t_node *head, long value);
-int		check_number(char *str);
 int		issorted(t_node *head);
 int		get_pos(t_stack *stack, int target);
 int		get_max(t_stack *stack);
@@ -64,19 +59,21 @@ int		get_min(t_stack *stack);
 
 long	pop(t_stack **stack);
 
-void	print_op(int flag);
 void	stack_clear(t_stack **stack_a);
-void	print_err(t_stack **stack, char **ptr);
-void	push_front(t_stack **stack, long value, int flag);
 void	push_back(t_stack **stack, int value);
 void	swap(t_stack *stack, int flag);
 void	rotate(t_stack **stack, int flag);
 void	reverse_rotate(t_stack **stack, int flag);
 void	push_front(t_stack **stack, long value, int flag);
-void	rotate_by_number(fp p, t_stack **stack, int flag, int size);
+void	rotate_by_number(t_fp p, t_stack **stack, int flag, int size);
 void	parsing(t_stack **stack, char **argv);
+void	sort_three(t_stack **stack);
+void	set_index(t_stack **stack);
+void	push_swap(t_stack **stack_a, t_stack **stack_b, int ch);
+
+int		ft_abs(int n);
+void	print_move(int flag);
+/*---- just for print ----- */
 void	stack_head(t_node *head, char c);
 void	stack_tail(t_node *tail, char c);
-void	small_stack(t_stack **stack);
-void	set_index(t_stack **stack);
 #endif

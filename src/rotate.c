@@ -6,7 +6,7 @@
 /*   By: aabourri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 15:15:53 by aabourri          #+#    #+#             */
-/*   Updated: 2023/06/07 15:18:16 by aabourri         ###   ########.fr       */
+/*   Updated: 2023/06/09 18:32:53 by aabourri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	swap(t_stack *stack, int flag)
 	c = head->value;
 	head->value = head->next->value;
 	head->next->value = c;
-	print_op(flag);
+	print_move(flag);
 }
 
 void	rotate(t_stack **stack, int flag)
@@ -39,7 +39,7 @@ void	rotate(t_stack **stack, int flag)
 	(*stack)->tail->next = tmp;
 	tmp->prev = (*stack)->tail;
 	(*stack)->tail = tmp;
-	print_op(flag);
+	print_move(flag);
 }
 
 void	reverse_rotate(t_stack **stack, int flag)
@@ -55,10 +55,10 @@ void	reverse_rotate(t_stack **stack, int flag)
 	(*stack)->head->prev = tmp;
 	tmp->next = (*stack)->head;
 	(*stack)->head = tmp;
-	print_op(flag);
+	print_move(flag);
 }
 
-void	rotate_by_number(fp p, t_stack **stack, int flag, int size)
+void	rotate_by_number(t_fp p, t_stack **stack, int flag, int size)
 {
 	int	i;
 

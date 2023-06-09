@@ -6,7 +6,7 @@
 /*   By: aabourri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 13:28:16 by aabourri          #+#    #+#             */
-/*   Updated: 2023/06/07 15:31:38 by aabourri         ###   ########.fr       */
+/*   Updated: 2023/06/09 13:59:04 by aabourri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 t_stack	*create_stack(void)
 {
 	t_stack	*stack;
-	size_t	size;
 
-	size = sizeof(*stack);
-	stack = malloc(size);
+	stack = malloc(sizeof(*stack));
 	if (!stack)
 		return (NULL);
-	ft_memset(stack, 0, size);
+	stack->head = NULL;
+	stack->tail = NULL;
+	stack->size = 0;
 	return (stack);
 }
