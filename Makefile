@@ -1,14 +1,12 @@
 NAME  	=	push_swap
 CC    	=	gcc
-CFLAGS	=	-Wall -Werror -Wextra -g3 -fsanitize=address 
+CFLAGS	=	-Wall -Werror -Wextra #-fsanitize=address 
 RM    	=	rm -fr
 
 SRC		= 	main.c create_stack.c \
 		  	check.c push.c create_node.c rotate.c get.c \
 		  	sort_functions.c sort_three.c set_index.c \
 			stack_clear.c
-
-		  
 OBJ   	=	$(addprefix src/, $(SRC:.c=.o))
 LIB   	=	./libft/libft.a
 

@@ -6,11 +6,11 @@
 /*   By: aabourri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 15:23:34 by aabourri          #+#    #+#             */
-/*   Updated: 2023/06/09 19:45:52 by aabourri         ###   ########.fr       */
+/*   Updated: 2023/06/10 14:56:51 by aabourri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../include/push_swap.h"
 
 static void	select_number(t_stack *stack, int *ptr, int low, int high)
 {
@@ -100,4 +100,5 @@ void	push_swap(t_stack **stack_a, t_stack **stack_b, int ch)
 	set_index(stack_a);
 	push2b(stack_a, stack_b, keys, size);
 	push2a(stack_a, stack_b);
+	free(*stack_b);
 }

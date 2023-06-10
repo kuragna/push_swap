@@ -6,11 +6,11 @@
 /*   By: aabourri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 19:34:13 by aabourri          #+#    #+#             */
-/*   Updated: 2023/06/09 19:11:54 by aabourri         ###   ########.fr       */
+/*   Updated: 2023/06/09 20:01:12 by aabourri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../include/push_swap.h"
 
 void	sort_three(t_stack **stack)
 {

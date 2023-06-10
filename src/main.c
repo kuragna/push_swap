@@ -6,43 +6,11 @@
 /*   By: aabourri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 15:19:50 by aabourri          #+#    #+#             */
-/*   Updated: 2023/06/09 19:50:07 by aabourri         ###   ########.fr       */
+/*   Updated: 2023/06/10 14:56:29 by aabourri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-
-#define STACK_A() stack_head(stack_a->head, 'a'); \
-	stack_tail(stack_a->tail, 'a');
-#define STACK_B() stack_head(stack_b->head, 'b'); \
-	stack_tail(stack_b->tail, 'b')
-
-void	stack_tail(t_node *tail, char c)
-{
-	printf("----- stack %c [tail] -----\n", c);
-	while (tail)
-	{
-		printf("%d\n", tail->value);
-		tail = tail->prev;
-	}
-	printf("----- stack %c [tail] -----\n", c);
-}
-
-void	stack_head(t_node *head, char c)
-{
-	printf("----- stack %c [head] -----\n", c);
-	while (head)
-	{
-		printf("%d\n", head->value);
-		head = head->next;
-	}
-	printf("----- stack %c [head] -----\n", c);
-}
-
-void	find_leaks(void)
-{
-	system("leaks -q push_swap");
-}
+#include "../include/push_swap.h"
 
 void	print_move(int flag)
 {
@@ -91,6 +59,8 @@ static void	sort_five(t_stack **stack_a, t_stack **stack_b)
 	sort_three(stack_a);
 	while (size_b--)
 		push_front(stack_a, pop(stack_b), PA);
+	if ((*stack_a)->size != 3)
+		free(*stack_b);
 }
 
 int	main(int argc, char **argv)
@@ -115,7 +85,8 @@ int	main(int argc, char **argv)
 		push_swap(&stack_a, &stack_b, 4);
 	else if (stack_a->size == 500)
 		push_swap(&stack_a, &stack_b, 11);
-	else if (stack_a->size >= 3)
+	else
 		sort_five(&stack_a, &stack_b);
+	stack_clear(&stack_a);
 	return (0);
 }
