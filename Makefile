@@ -14,13 +14,13 @@ LIB   	=	./libft/libft.a
 all: $(LIB) $(NAME)
 
 %.o: %.c
-	$(CC) -c $(CFLAGS) $< -o $@
+	$(CC) -g3 -c $(CFLAGS) $< -o $@
 
 $(LIB):
 	make -C ./libft/
 
 $(NAME): $(OBJ)
-	$(CC) -o $@ $(CFLAGS) $(LIB) $(OBJ)
+	$(CC) -o $@ $(CFLAGS) -L./libft/ $(OBJ) -lft
 
 clean:
 	make clean -C ./libft/
